@@ -29,7 +29,7 @@ if [ ! "$BASH_VERSION" ] ; then
 fi
 
 export LOCKFILE=/var/tmp/LOCK-MyScript-LOCK  	# mutual exclusion lock file
-trap "/bin/rm -rf $LOCKFILE" 0                  # clean up on exit (including all trappable abnormal terminations)
+trap '/bin/rm -rf $LOCKFILE' 0                  # clean up on exit (including all trappable abnormal terminations)
 
 ## Functions for logging, die, try
 #
@@ -38,7 +38,8 @@ log () {	# useful wrapper if your script may use multilog or syslog but may not 
 }
 #
 die() {
-  log "FATAL $@" ;
+  local o ; o=$* ;
+  log "FATAL $o" ;
   exit 1;
 }
 #
@@ -46,8 +47,8 @@ try() {
   "$@"
   local EXIT_CODE=$?
   if [[ $EXIT_CODE -ne 0 ]]; then
-    local FILE=$(readlink -m "${BASH_SOURCE[1]}")
-    local LINE=${BASH_LINENO[0]}
+    local FILE ; FILE=$(readlink -m "${BASH_SOURCE[1]}")
+    local LINE ; LINE=${BASH_LINENO[0]}
     log "WARN $FILE: line $LINE: Command \`$*' failed with exit code $EXIT_CODE."
   fi
   return $EXIT_CODE
@@ -81,7 +82,7 @@ mutex () {
   exec 9>>"$file"                         # file descripers 2, 9 find all processes currently accessing lock
   { pids=$(fuser -f "$file"); } 2>&- 9>&- # gather pids of all processes accessing lock file using fuser(1)
   for pid in $pids; do                    # loop through all PIDs
-    [[ $pid = $$ ]] && continue           # ignore our own PID
+    [[ "$pid" = "$$" ]] && continue           # ignore our own PID
     exec 9>&-                             # Someone else has the lock file
     return 1                              # return error code
   done
@@ -98,12 +99,10 @@ mutex () {
 # For Solaris, we need to retreat to the least reliable /bin/sh method:
 #
 export LOCKFILE=/var/tmp/LOCK-myscriptname-LOCK
-trap "/bin/rm -rf $LOCKFILE" 0      # clean up on exit (including all trappable abnormal terminations)
+trap '/bin/rm -rf $LOCKFILE' 0      # clean up on exit (including all trappable abnormal terminations)
 mutex() {
   echo "INFO Trying to get lock $LOCKFILE..."
-   mkdir $LOCKFILE  && {
-    log "INFO We have the lock"
-  } || {
+   mkdir $LOCKFILE  || {
     log "WARN Failed to acquire lock!  mkdir returned $?"
     exit 1
   }
@@ -121,7 +120,8 @@ mutex() {
 # Example use of multilog from a bash script:
 #
 main () {
-  for i in {000..300}
+  export i ;
+  for i in {000..300} ; do
     echo "DEBUG hello world"
   done
 }
