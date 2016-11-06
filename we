@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+we() {
+  location=${1:-98005}
+  curl wttr.in/$location
+}
+
+main() {
+  we
+}
+
+main
