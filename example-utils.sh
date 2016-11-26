@@ -2,12 +2,10 @@
 #===============================================================================
 #
 #          FILE:  utils-functions.sh
-# 
-#         USAGE:  N/A
-# 
+#         USAGE:  example-utils.sh
 #   DESCRIPTION:  a small collection of reusable bash functions that are helpful for scripting
 #		  not intended to be . sourced or loaded, but copy-pasted and changed for 
-#		  each script.
+#		  each script.  This script is an example of using the utils.
 # 
 #        AUTHOR:  Mitch Wyle (mfw), mwyle@ebay.com
 #       COMPANY:  eBay Inc.
