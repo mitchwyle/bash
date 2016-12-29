@@ -2,9 +2,9 @@
 
 # Send email to a list, one message at a time
 
-export MSGFILE=tm
+export MSGFILE=tm # file containing message including From, Subject
 
-die() {
+die() {		  # helper function
   echo $1
   exit 1
 }
