@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Send email to a list, one message at a time
+# requires a mail transport such as postscript, e.g. sudo apt-get install postscript
 
 export MSGFILE=tm # file containing message including From, Subject
 
