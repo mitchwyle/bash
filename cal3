@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+case $# in
+  0) month=$(date +%m) year=$(date +%Y);;
+  2) month=$1 year=$2;;
+  *) echo 1>&2 "Usage: $0 [MONTH YEAR]"; exit 3;;
+esac
+month=${month#"${month%%[!0]*}"}
+if ((month == 1)); then
+  previous_month=12 previous_year=$((year-1))
+else
+  previous_month=$((month-1)) previous_year=$year
+fi
+if ((month == 12)); then
+  next_month=1 next_year=$((year+1))
+else
+  next_month=$((month+1)) next_year=$year
+fi
+paste <(cal "$previous_month" "$previous_year") \
+      <(cal "$month" "$year") \
+      <(cal "$next_month" "$next_year")
