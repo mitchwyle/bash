@@ -19,14 +19,18 @@ validAlphaNum()
 
 # Sample usage of this function in a script
 
-echo -n "Enter input: "
-read input
+main() {
+  echo -n "Enter input: "
+  read input
+  
+  if ! validAlphaNum "$input" ; then
+    echo "Your input must consist of only letters and numbers." >&2
+    exit 1
+  else
+    echo "Input is valid."
+  fi
+  
+  exit 0
+}
 
-if ! validAlphaNum "$input" ; then
-  echo "Your input must consist of only letters and numbers." >&2
-  exit 1
-else
-  echo "Input is valid."
-fi
-
-exit 0
+main $*

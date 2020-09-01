@@ -47,5 +47,9 @@ function main {
   done
 }
 
+err() {
+  echo wrong
+}
+
 # Usage:  Run this program in a pipeline: $0 | sort -n | head -20
 main $*

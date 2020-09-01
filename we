@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 we() {
-  location=${1:-98005}
-  curl wttr.in/$location
+  location=${1:-"~47.5940766,-122.1923371"}
+  curl https://wttr.in/$location
 }
 
 main() {
