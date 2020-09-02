@@ -1,4 +1,4 @@
 
 # bash
 
-bash script function collection
+bash script function collection and example scripts
