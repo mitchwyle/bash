@@ -9,7 +9,7 @@
 # 
 #        AUTHOR:  Mitch Wyle (mfw), mwyle@ebay.com
 #       COMPANY:  eBay Inc.
-#       VERSION:  0.0.2
+#       VERSION:  0.0.3
 #       CREATED:  10/16/2014 02:22:46 PM PDT
 #      MODIFIED:  11/05/2014 10:30:00 AM PDT
 #     COPYRIGHT:  Author disclaims copyright; instead, here is a blessing:
