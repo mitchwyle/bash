@@ -7,6 +7,7 @@
 
 function shkillall() {
   local USAGE="Usage: $0 program"
+  local program=""
   # Verify we have exactly one parameter, the name of the program we want to kill:
   case $# in
    1) x=x ;;
@@ -14,13 +15,20 @@ function shkillall() {
       echo $USAGE 
       exit 3 ;;
   esac
+  program=$1
 
   $DBUG && set -x
-  ps aux | 
-  grep $1 |
-  grep -v grep |
-  awk '{ print $2 }' |
-  xargs kill 
+    pidlist="$(
+    ps aux | 
+    grep $1 |
+    grep -v grep |
+    awk '{ print $2 }' )"
+    $DBUG && echo "pidlist = $pidlist"
+    case $pidlist"x" in
+      x) echo "No instances of the program $program were running." ; exit 0 ;;
+      *) x=x ;;
+    esac
+    kill $pidlist
 }
 
 
