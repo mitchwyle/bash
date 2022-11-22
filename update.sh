@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-apt-get update -q -y >& /dev/null && apt-get upgrade -q -y >& /dev/null
+apt update -q -y >& /dev/null && apt upgrade -q -y >& /dev/null
 
