@@ -13,8 +13,8 @@ die() {		  	# helper function
 
 main() {
   [ -f $1 ] || die "WTF: No list of addresses, exiting."
-  cat $1 | 
-  while read addr ; do
+  addrfile=$1
+  while read addr < "$addrfile" ; do
     echo "To: $addr"",mwyle@ebay.com" | cat - $MSGFILE | /usr/sbin/sendmail -oi -t
     echo "sending $MSGFILE to $addr . . ."
   done
