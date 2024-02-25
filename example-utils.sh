@@ -7,11 +7,10 @@
 #		  not intended to be . sourced or loaded, but copy-pasted and changed for 
 #		  each script.  This script is an example of using the utils.
 # 
-#        AUTHOR:  Mitch Wyle (mfw), mwyle@ebay.com
-#       COMPANY:  eBay Inc.
-#       VERSION:  0.0.3
-#       CREATED:  10/16/2014 02:22:46 PM PDT
-#      MODIFIED:  11/05/2014 10:30:00 AM PDT
+#        AUTHOR:  Mitch Wyle mfw@wyle.org
+#       VERSION:  0.0.4
+#       CREATED:  2014-10-16 0220z
+#      MODIFIED:  2024-02-24 1640z
 #     COPYRIGHT:  Author disclaims copyright; instead, here is a blessing:
 #
 #		  May you do good and not evil.
@@ -21,12 +20,12 @@
 #===============================================================================
 
 # It is often a good idea to put this block near the top of your script file:
-# Must run under bash!   Bash-specific commands used.
+# Must run with  bash!   Bash-specific syntax and built-ins used.
 if [ ! "$BASH_VERSION" ] ; then
   exec /bin/bash "$0" "$@"
 fi
 
-export LOCKFILE=/var/tmp/LOCK-MyScript-LOCK  	# mutual exclusion lock file
+export LOCKFILE="/var/tmp/LOCK-MyScript-LOCK_$$" # mutual exclusion lock file
 trap '/bin/rm -rf $LOCKFILE' 0                  # clean up on exit (including all trappable abnormal terminations)
 
 ## Functions for logging, die, try
